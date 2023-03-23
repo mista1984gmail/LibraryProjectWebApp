@@ -3,6 +3,7 @@ package com.example.LibraryProjectWebApp.service;
 
 import com.example.LibraryProjectWebApp.persistance.entity.Book;
 import com.example.LibraryProjectWebApp.persistance.entity.User;
+import com.example.LibraryProjectWebApp.service.dto.BookDto;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -31,7 +32,7 @@ public interface UserService extends UserDetailsService {
     User findByUsername(String username);
 
     boolean activateUser(String code);
-    List<Book> getBooksByUserId(Long id);
+    List<BookDto> getBooksByUserId(Long id);
 
 
 }

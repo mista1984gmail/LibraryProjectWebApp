@@ -60,11 +60,11 @@
             <th:block th:each="book : ${books}">
                 <tr>
                     <td th:style="${book.isExpired()} ? 'color: red' : 'color: black'">[[${book.codeBook}]]</td>
-                    <td>[[${book.title}]]</td>
-                    <td>[[${book.author}]]</td>
-                    <td>[[${book.year}]]</td>
-                    <td>[[${book.takenAtString}]]</td>
-                    <td>[[${book.returnBefore}]]</td>
+                    <td th:style="${book.isExpired()} ? 'color: red' : 'color: black'">[[${book.title}]]</td>
+                    <td th:style="${book.isExpired()} ? 'color: red' : 'color: black'">[[${book.author}]]</td>
+                    <td th:style="${book.isExpired()} ? 'color: red' : 'color: black'">[[${book.year}]]</td>
+                    <td th:style="${book.isExpired()} ? 'color: red' : 'color: black'">[[${book.takenAtString}]]</td>
+                    <td th:style="${book.isExpired()} ? 'color: red' : 'color: black'">[[${book.returnBefore}]]</td>
                     <td>
                         <a th:href="@{'/librarian/book/'+${user.id}+'/release/'+${book.id}}">Release</a>
                     </td>

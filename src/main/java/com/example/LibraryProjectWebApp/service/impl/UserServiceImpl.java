@@ -1,13 +1,14 @@
 package com.example.LibraryProjectWebApp.service.impl;
 
+import com.example.LibraryProjectWebApp.config.Constant;
 import com.example.LibraryProjectWebApp.exception.IdIsNotFoundOnDbException;
 import com.example.LibraryProjectWebApp.exception.UserNameNotFoundException;
-import com.example.LibraryProjectWebApp.persistance.entity.Book;
 import com.example.LibraryProjectWebApp.persistance.entity.Role;
 import com.example.LibraryProjectWebApp.persistance.entity.User;
-import com.example.LibraryProjectWebApp.persistance.repository.BooksRepository;
 import com.example.LibraryProjectWebApp.persistance.repository.UserRepository;
 import com.example.LibraryProjectWebApp.service.UserService;
+import com.example.LibraryProjectWebApp.service.convertor.BookMapper;
+import com.example.LibraryProjectWebApp.service.dto.BookDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
@@ -28,6 +29,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final SendEmailService sendEmailService;
+    private final BookMapper bookMapper;
 
     @Override
     public List<User> findAll() {
@@ -170,19 +172,26 @@ public class UserServiceImpl implements UserService {
                 + " (" + user.getId() + ")" + " activated.");
         return true;
     }
-    public List<Book> getBooksByUserId(Long id) {
+    public List<BookDto> getBooksByUserId(Long id) {
         Optional<User> person = userRepository.findById(id);
 
         if (person.isPresent()) {
             Hibernate.initialize(person.get().getBooks());
-            person.get().getBooks().forEach(book -> {
+            List<BookDto>books = bookMapper.toListDto(person.get().getBooks());
+            books.forEach(book -> {
+                long diffInMillies = Math.abs(book.getTakenAt().getTime() - new Date().getTime());
+                // 864000000 милисекунд = 10 суток
+                if (diffInMillies > Constant.BOOK_RETURN_DEADLINE_MS)
+                    book.setExpired(true);
+            });
+       /*     person.get().getBooks().forEach(book -> {
                 long diffInMillies = Math.abs(book.getTakenAt().getTime() - new Date().getTime());
                 // 864000000 милисекунд = 10 суток
                 if (diffInMillies > 1800000)
                     book.setExpired(true);
-            });
+            });*/
 
-            return person.get().getBooks();
+            return books;
         }
         else {
             return Collections.emptyList();

@@ -6,6 +6,8 @@ import com.example.LibraryProjectWebApp.persistance.entity.Book;
 import com.example.LibraryProjectWebApp.persistance.entity.User;
 import com.example.LibraryProjectWebApp.persistance.repository.BooksRepository;
 import com.example.LibraryProjectWebApp.service.BookService;
+import com.example.LibraryProjectWebApp.service.convertor.BookMapper;
+import com.example.LibraryProjectWebApp.service.dto.BookDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -24,70 +26,74 @@ public class BooksServiceImpl implements BookService {
 
     private final BooksRepository booksRepository;
     private final SendEmailService sendEmailService;
+    private final BookMapper bookMapper;
 
     @Autowired
-    public BooksServiceImpl(BooksRepository booksRepository, SendEmailService sendEmailService) {
+    public BooksServiceImpl(BooksRepository booksRepository, SendEmailService sendEmailService, BookMapper bookMapper) {
         this.booksRepository = booksRepository;
         this.sendEmailService = sendEmailService;
+        this.bookMapper = bookMapper;
     }
 
-    public List<Book> findAll(boolean sortByYear) {
+    public List<BookDto> findAll(boolean sortByYear) {
         if (sortByYear)
-            return booksRepository.findAll(Sort.by("year"));
+            return bookMapper.toListDto(booksRepository.findAll(Sort.by("year")));
         else
-            return booksRepository.findAll();
+            return bookMapper.toListDto(booksRepository.findAll());
     }
 
-    public List<Book> findWithPagination(Integer page, Integer booksPerPage, boolean sortByYear) {
+    public List<BookDto> findWithPagination(Integer page, Integer booksPerPage, boolean sortByYear) {
         if (sortByYear)
-            return booksRepository.findAll(PageRequest.of(page, booksPerPage, Sort.by("year"))).getContent();
+            return bookMapper.toListDto(booksRepository.findAll(PageRequest.of(page, booksPerPage, Sort.by("year"))).getContent());
         else
-            return booksRepository.findAll(PageRequest.of(page, booksPerPage)).getContent();
+            return bookMapper.toListDto(booksRepository.findAll(PageRequest.of(page, booksPerPage)).getContent());
     }
 
     @Override
-    public List<Book> findOverdueBooks() {
+    public List<BookDto> findOverdueBooks() {
         return booksRepository.findAll().stream()
-                .filter(e -> e.getTakenAt()!=null)
-                .filter(e -> Math.abs(e.getTakenAt().getTime() - new Date().getTime()) > Constant.BOOK_RETURN_DEADLINE)
+                .filter(e -> e.getTakenAt() != null)
+                .filter(e -> Math.abs(e.getTakenAt().getTime() - new Date().getTime()) > Constant.BOOK_RETURN_DEADLINE_MS).toList()
+                .stream()
+                .map(bookMapper::modelToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Book> findByOwnerIsNull() {
-        return booksRepository.findByOwnerIsNull();
+    public List<BookDto> findByOwnerIsNull() {
+        return bookMapper.toListDto(booksRepository.findByOwnerIsNull());
     }
 
     @Override
-    public List<Book> findByOwnerIsNullAndBookedIsFalse() {
-        return booksRepository.findByOwnerIsNullAndBookedIsFalse();
+    public List<BookDto> findByOwnerIsNullAndBookedIsFalse() {
+        return bookMapper.toListDto(booksRepository.findByOwnerIsNullAndBookedIsFalse());
     }
 
-    public Book findOne(Long id) {
+    public BookDto findOne(Long id) {
         Optional<Book> foundBook = booksRepository.findById(id);
-        return foundBook.orElse(null);
+        return bookMapper.modelToDto(foundBook.orElse(null));
     }
 
-    public List<Book> searchByTitle(String query) {
-        return booksRepository.findByTitleStartingWith(query);
+    public List<BookDto> searchByTitle(String query) {
+        return bookMapper.toListDto(booksRepository.findByTitleStartingWith(query));
     }
 
     @Transactional
-    public void save(Book book) {
+    public void save(BookDto book) {
         book.setCodeBook(UUID.randomUUID().toString());
         book.setTakenAt(new Date());
         book.setBooked(false);
-        booksRepository.save(book);
+        booksRepository.save(bookMapper.dtoToModel(book));
     }
 
     @Transactional
-    public void update(Long id, Book updatedBook) {
+    public void update(Long id, BookDto updatedBook) {
         Book bookToBeUpdated = booksRepository.findById(id).get();
 
         updatedBook.setId(id);
         updatedBook.setTakenAt(new Date());
         updatedBook.setOwner(bookToBeUpdated.getOwner());
-        booksRepository.save(updatedBook);
+        booksRepository.save(bookMapper.dtoToModel(updatedBook));
     }
 
     @Transactional
@@ -134,7 +140,7 @@ public class BooksServiceImpl implements BookService {
 
     @Override
     public void sendMessage(Long id, User user) {
-        Book book = booksRepository.findById(id).get();
+        BookDto book = bookMapper.modelToDto(booksRepository.findById(id).get());
 
         sendEmailService.sendEmail(
                 user.getEmail(),

@@ -5,6 +5,8 @@ import com.example.LibraryProjectWebApp.persistance.entity.Book;
 import com.example.LibraryProjectWebApp.persistance.entity.User;
 import com.example.LibraryProjectWebApp.service.BookService;
 import com.example.LibraryProjectWebApp.service.UserService;
+import com.example.LibraryProjectWebApp.service.convertor.BookMapper;
+import com.example.LibraryProjectWebApp.service.dto.BookDto;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,7 @@ public class LibrarianController {
 
     private final UserService userService;
     private final BookService bookService;
+    private final BookMapper bookMapper;
 
 
     @RequestMapping(value = "/librarian", method = RequestMethod.GET)
@@ -39,7 +42,7 @@ public class LibrarianController {
     }
 
     @PostMapping("/book")
-    public String createBook(@ModelAttribute("book") @Valid Book Book,
+    public String createBook(@ModelAttribute("book") @Valid BookDto Book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "librarian/book_form";
@@ -55,7 +58,7 @@ public class LibrarianController {
     }
 
     @PostMapping("books/{id}")
-    public String update(@ModelAttribute("book") @Valid Book book, BindingResult bindingResult,
+    public String update(@ModelAttribute("book") @Valid BookDto book, BindingResult bindingResult,
                          @PathVariable("id") Long id) {
         if (bindingResult.hasErrors())
             return "librarian/edit_book";
@@ -127,7 +130,7 @@ public class LibrarianController {
     @GetMapping("/books/{id}")
     public String userBooks(@PathVariable("id") Long id, Model model){
         User user = userService.findUserById(id);
-        List<Book> books = user.getBooks();
+        List<BookDto> books = bookMapper.toListDto(user.getBooks());
         model.addAttribute("user", user);
         model.addAttribute("books", books);
 

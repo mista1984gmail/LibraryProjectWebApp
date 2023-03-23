@@ -5,6 +5,7 @@ import com.example.LibraryProjectWebApp.persistance.entity.Book;
 import com.example.LibraryProjectWebApp.persistance.entity.User;
 import com.example.LibraryProjectWebApp.service.BookService;
 import com.example.LibraryProjectWebApp.service.UserService;
+import com.example.LibraryProjectWebApp.service.dto.BookDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +32,7 @@ public class UserController {
     @RequestMapping(value = "/history/{id}", method = RequestMethod.GET)
     public String userInfo(@PathVariable("id") Long id, Model model) {
         User user = userService.findUserById(id);
-        List<Book> listOfBooks = userService.getBooksByUserId(id);
+        List<BookDto> listOfBooks = userService.getBooksByUserId(id);
 
         model.addAttribute("user", user);
         model.addAttribute("listOfBooks", listOfBooks);
