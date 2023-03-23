@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Access Denied</title>
+</head>
+
+<body>
+<div
+        style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
+
+    <a th:href="@{/}" >Home</a>
+
+    | &nbsp;
+
+    <a th:href="@{/logout}" >Logout</a>
+
+</div>
+
+<h3 style="color: red;" >You do not have permission to access this page!</h3>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:visibility="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit information</title>
+    <link rel ="stylesheet" type="text/css" href="../../static/css/style-admin.css" th:href="@{/css/style-admin.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+</head>
+<body class="bg-success p-2 text-dark bg-opacity-25">
+<th:block th:include="/admin/_menu_admin"></th:block>
+<div><h4 class="text-light"></h4>User</div>
+
+<form class="row g-3" action="#" th:action="@{'/admin/save/'+${user.id}}" th:object="${user}" method="post">
+    <div class="col-md-4">
+        <label for="username" class="form-label bg-info text-light" >Username</label>
+        <input type="text" class="form-control" th:field="*{username}" id="username" placeholder="Username">
+        <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</div>
+
+    </div>
+    <div class="col-md-8" hidden>
+        <label for="password" class="form-label bg-info text-light" >Password</label>
+        <input type="text" class="form-control" th:field="*{password}" id="password" placeholder="password">
+        <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</div>
+    </div>
+    <div class="col-4">
+        <label for="firstName" class="form-label bg-info text-light">First name</label>
+        <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="First Name">
+    </div>
+    <div class="col-4">
+        <label for="lastName" class="form-label bg-info text-light" >Last name</label>
+        <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Last Name">
+    </div>
+    <div class="col-4">
+        <label for="birthday" class="form-label bg-info text-light" >Birthday</label>
+        <input type="date" class="form-control" th:field="*{birthday}" id="birthday" placeholder="Birthday">
+    </div>
+    <div class="col-md-12">
+        <label for="address" class="form-label bg-info text-light">Address</label>
+        <input type="text" class="form-control" th:field="*{address}" id="address" placeholder="Address">
+    </div>
+    <div class="col-md-6">
+        <label for="email" class="form-label bg-info text-light">email</label>
+        <input type="text" class="form-control" th:field="*{email}" id="email" placeholder="email">
+        <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
+    </div>
+    <div class="col-md-6">
+        <label for="telephone" class="form-label bg-info text-light" >Telephone</label>
+        <input type="text" class="form-control" th:field="*{telephone}" id="telephone" placeholder="Telephone">
+        <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Name Error</div>
+    </div>
+
+    <div class="col-md-12">
+
+    <th:block  th:each="role: ${roles}">
+
+        <input type = "hidden" name="detailID" th:value="${role.id}" />
+        <div class="form-group row">
+            <label class="col-form-label col-sm-1 bg-info text-light">Role</label>
+            <div class="col-sm-4">
+
+                <select type="text" name="detailName" th:value="${role.name}" class="form-control" required>
+                    <th:block th:unless="${role.name.equals(typ.name)}" th:each="typ : ${roleType}">
+                        <option type="text" th:text="${typ.name}" th:value="${typ.name}"/>
+                    </th:block>
+                    <th:block th:if="${role.name.equals(typ.name)}" th:each="typ : ${roleType}">
+                         <option type="text" th:text="${typ.name}" th:value="${typ.name}" selected/>
+                    </th:block>
+
+                </select>
+
+            </div>
+        </div>
+
+    </th:block>
+    </div>
+
+    <div class="col-md-12">
+    <label class="col-sm-1 bg-info text-light" for="active" >Active</label>
+    <input class="form-check-input" type="checkbox" th:field="*{active}" id="active" placeholder="active">
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary" >Save</button>
+    </div>
+</form>
+
+</div>
+
+</body>
+</html>

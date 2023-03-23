@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Books</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel ="stylesheet" type="text/css" href="../../static/css/style-user.css" th:href="@{/css/style-user.css}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body class="bg-success p-2 text-dark bg-opacity-25">
+<nav class="navbar navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{'/user/user/'+${person.id}}" >USER APP</a>
+        <div class="btn-group dropstart">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <li><a class="dropdown-item"  th:href="@{'/user/user/'+${person.id}}" >Home</a></li>
+                <li><a class="dropdown-item" th:href="@{'/user/books/'+${person.id}}">Find book</a></li>
+                <li><a class="dropdown-item" th:href="@{'/user/history/'+${person.id}}">My books</a></li>
+                <li><a class="dropdown-item" th:href="@{'/user/edit/'+${person.id}}">Account</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" >Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br>
+
+<div th:switch="${books}">
+    <h2 th:case="null">No Books found!</h2>
+    <div th:case="*">
+        <div><h2 class="text-center text-dark bg-info" >Books</h2></div>
+
+        <input class="form-control" id="myInput" type="text" placeholder="Search..">
+        <br>
+        <table class="table table-bordered table-success table-hover">
+            <thead class="thead-dark">
+            <tr>
+                <th >Code book</th>
+                <th >Title</th>
+                <th >Author</th>
+                <th >Year</th>
+                <th >Action</th>
+            </tr>
+            </thead>
+            <tbody id="myTable">
+            <th:block th:each="book : ${books}">
+                <tr>
+                    <td>[[${book.codeBook}]]</td>
+                    <td>[[${book.title}]]</td>
+                    <td>[[${book.author}]]</td>
+                    <td>[[${book.year}]]</td>
+                    <td>
+                        <a th:object="${person}" th:field="*{id}" id="person" th:href="@{'/user/' + ${person.id} + '/book/add/'+${book.id}}">Booking</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+    </div>
+
+</div>
+
+<script src="../../static/script/find.js" th:src="@{/script/find.js}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
+</html>
