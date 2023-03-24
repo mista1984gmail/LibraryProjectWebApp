@@ -42,6 +42,6 @@ public class SendEmailService {
         simpleMailMessage.setText(message);
 
         javaMailSender.send(simpleMailMessage);
-
+        log.info("Email has been sent to  " + to);
     }
 }

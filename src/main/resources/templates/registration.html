@@ -58,6 +58,7 @@
             <label for="email" class="form-label bg-info text-light">email</label>
             <input type="text" class="form-control" th:field="*{email}" id="email" placeholder="email">
             <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
+            <div style="color:red" th:text ="${emailError}"></div>
         </div>
         <div class="col-md-6">
             <label for="telephone" class="form-label bg-info text-light" >Telephone</label>

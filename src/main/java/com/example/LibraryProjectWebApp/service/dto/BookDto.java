@@ -59,8 +59,8 @@ public class BookDto {
         Calendar c = Calendar.getInstance();
         try {
             c.setTime(sdf.parse(getTakenAt().toString()));
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
+        } catch (ParseException | NullPointerException e) {
+            log.error(e.getMessage());
         }
         c.add(Calendar.DATE, Constant.BOOK_RETURN_DEADLINE_DAYS);
         return new SimpleDateFormat("dd MMM yyyy").format(c.getTime());
@@ -90,6 +90,17 @@ public class BookDto {
         return booked;
     }
     public Date getTakenAt() {
-        return takenAt;
+     return takenAt;
+    }
+
+    @Override
+    public String toString() {
+        return "BookDto{" +
+                "id=" + id +
+                ", codeBook='" + codeBook + '\'' +
+                ", title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year +
+                '}';
     }
 }

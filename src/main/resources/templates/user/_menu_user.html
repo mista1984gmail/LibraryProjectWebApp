@@ -9,7 +9,7 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                     <li><a class="dropdown-item"  th:href="@{'/user/user/'+${user.id}}" >Home</a></li>
                     <li><a class="dropdown-item" th:href="@{'/user/books/'+${user.id}}">Find book</a></li>
-                    <li><a class="dropdown-item" th:href="@{'/user/history/'+${user.id}}">My books</a></li>
+                    <li><a class="dropdown-item" th:href="@{'/user/info/'+${user.id}}">My books</a></li>
                     <li><a class="dropdown-item" th:href="@{'/user/edit/'+${user.id}}">Account</a></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" >Logout</a></li>

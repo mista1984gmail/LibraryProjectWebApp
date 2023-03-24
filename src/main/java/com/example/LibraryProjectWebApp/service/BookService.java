@@ -1,13 +1,12 @@
 package com.example.LibraryProjectWebApp.service;
 
-import com.example.LibraryProjectWebApp.persistance.entity.Book;
 import com.example.LibraryProjectWebApp.persistance.entity.User;
 import com.example.LibraryProjectWebApp.service.dto.BookDto;
 
 import java.util.List;
 
 public interface BookService {
-    List<BookDto> findAll(boolean sortByYear);
+    List<BookDto> findAll();
     List<BookDto> findWithPagination(Integer page, Integer booksPerPage, boolean sortByYear);
     List<BookDto> findOverdueBooks();
     List<BookDto> findByOwnerIsNull();

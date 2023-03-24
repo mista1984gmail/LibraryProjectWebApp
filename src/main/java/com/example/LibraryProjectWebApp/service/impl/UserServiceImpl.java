@@ -32,12 +32,6 @@ public class UserServiceImpl implements UserService {
     private final BookMapper bookMapper;
 
     @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
-    }
-
-
-    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByUsername(username);
         if (user == null) {
@@ -53,13 +47,12 @@ public class UserServiceImpl implements UserService {
         if(userFromDb==null){
             throw new IdIsNotFoundOnDbException(id);
         }
-
         log.info("User by id: " + id + " found.");
         return userFromDb.orElse(new User());
     }
 
     @Override
-    public List<User> allUsers() {
+    public List<User> findAll() {
         log.info("Find all users");
         return userRepository.findAll();
     }
@@ -173,28 +166,27 @@ public class UserServiceImpl implements UserService {
         return true;
     }
     public List<BookDto> getBooksByUserId(Long id) {
+        log.info("Find user by id: " + id);
         Optional<User> person = userRepository.findById(id);
-
         if (person.isPresent()) {
             Hibernate.initialize(person.get().getBooks());
             List<BookDto>books = bookMapper.toListDto(person.get().getBooks());
             books.forEach(book -> {
                 long diffInMillies = Math.abs(book.getTakenAt().getTime() - new Date().getTime());
-                // 864000000 милисекунд = 10 суток
                 if (diffInMillies > Constant.BOOK_RETURN_DEADLINE_MS)
                     book.setExpired(true);
             });
-       /*     person.get().getBooks().forEach(book -> {
-                long diffInMillies = Math.abs(book.getTakenAt().getTime() - new Date().getTime());
-                // 864000000 милисекунд = 10 суток
-                if (diffInMillies > 1800000)
-                    book.setExpired(true);
-            });*/
-
+            log.info("Find all books");
             return books;
         }
         else {
             return Collections.emptyList();
         }
+    }
+
+    @Override
+    public Optional<User> findByEmail(String email) {
+        log.info("Find user by email: " + email);
+        return userRepository.findByEmail(email);
     }
 }

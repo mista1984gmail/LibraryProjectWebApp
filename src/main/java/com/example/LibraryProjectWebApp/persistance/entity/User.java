@@ -4,7 +4,6 @@ import com.example.LibraryProjectWebApp.web.validator.PhoneNumber;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.UniqueElements;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -51,7 +50,8 @@ public class User implements UserDetails {
     private String address;
 
     @Column(name="email",
-            nullable = false, unique = true)
+            nullable = false)
+    @NotEmpty(message = "email must not be empty")
     @Email
     private String email;
 
@@ -119,5 +119,13 @@ public class User implements UserDetails {
         return Period.between(this.birthday,LocalDate.now()).getYears();
     }
 
-
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthday=" + birthday +
+                '}';
+    }
 }

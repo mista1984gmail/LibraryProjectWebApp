@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet author="s.mitskevich (generated)" id="1679572642943-1">
+        <createTable tableName="book">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="book_pkey"/>
+            </column>
+            <column name="author" type="VARCHAR(255)"/>
+            <column name="booked" type="BOOLEAN"/>
+            <column name="code_book" type="VARCHAR(255)"/>
+            <column name="taken_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="title" type="VARCHAR(255)"/>
+            <column name="year" type="INTEGER"/>
+            <column name="user_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="s.mitskevich (generated)" id="1679572642943-2">
+        <createTable tableName="role">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="role_pkey"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="s.mitskevich (generated)" id="1679572642943-3">
+        <createTable tableName="users">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_pkey"/>
+            </column>
+            <column name="activation_code" type="VARCHAR(255)"/>
+            <column name="active" type="BOOLEAN"/>
+            <column name="address" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birthday" type="date"/>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(128)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telephone" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_user" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="s.mitskevich (generated)" id="1679572642943-4">
+        <addUniqueConstraint columnNames="name_user" constraintName="uk_6b6qmheg57yryjh1xva2itww8" tableName="users"/>
+    </changeSet>
+    <changeSet author="s.mitskevich (generated)" id="1679572642943-5">
+        <createTable tableName="users_roles">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_roles_pkey"/>
+            </column>
+            <column name="roles_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="users_roles_pkey"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="s.mitskevich (generated)" id="1679572642943-6">
+        <addForeignKeyConstraint baseColumnNames="roles_id" baseTableName="users_roles" constraintName="fk15d410tj6juko0sq9k4km60xq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="role"/>
+    </changeSet>
+    <changeSet author="s.mitskevich (generated)" id="1679572642943-7">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="users_roles" constraintName="fk2o0jvgh89lemvvo17cbqvdxaa" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" />
+    </changeSet>
+    <changeSet author="s.mitskevich (generated)" id="1679572642943-8">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="book" constraintName="fk9cv1tt952k857xoia51k1vj12" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="users" />
+    </changeSet>
+
+</databaseChangeLog>

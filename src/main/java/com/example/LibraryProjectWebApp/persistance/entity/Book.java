@@ -14,7 +14,8 @@ import java.util.Date;
 @Entity
 @Table(name = "Book")
 @Slf4j
-public class Book {
+public class
+Book {
 
     @Id
     @Column(name = "id")

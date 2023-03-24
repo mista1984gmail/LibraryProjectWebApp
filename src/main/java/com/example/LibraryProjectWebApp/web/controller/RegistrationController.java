@@ -2,8 +2,9 @@ package com.example.LibraryProjectWebApp.web.controller;
 
 import com.example.LibraryProjectWebApp.persistance.entity.User;
 import com.example.LibraryProjectWebApp.service.UserService;
+import com.example.LibraryProjectWebApp.web.validator.EmailValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,12 +14,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-
+@Slf4j
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
 
     private final UserService userService;
+    private final EmailValidator emailValidator;
 
     @GetMapping("/registration")
     public String registration(Model model) {
@@ -28,9 +30,13 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult bindingResult, Model model) {
-
-        if (bindingResult.hasErrors()) {
+    public String registrationUser(@ModelAttribute("userForm") @Valid User userForm, BindingResult emailBinding, BindingResult telephoneBinding,  Model model) {
+        if (telephoneBinding.hasErrors()) {
+            return "registration";
+        }
+        emailValidator.validate(userForm, emailBinding);
+        log.info("Validate user by unique email");
+        if (emailBinding.hasErrors()) {
             return "registration";
         }
         if (!userForm.getPassword().equals(userForm.getPasswordConfirm())){
@@ -45,7 +51,8 @@ public class RegistrationController {
         return "redirect:/";
     }
     @GetMapping("/activate/{code}")
-    public String activate(Model model, @PathVariable String code){
+    public String activateUser(Model model, @PathVariable String code){
+        log.info("Activate user");
         boolean isActivated = userService.activateUser(code);
         if(isActivated){
             model.addAttribute("message","User successfully activated");

@@ -1,7 +1,6 @@
 package com.example.LibraryProjectWebApp.service;
 
 
-import com.example.LibraryProjectWebApp.persistance.entity.Book;
 import com.example.LibraryProjectWebApp.persistance.entity.User;
 import com.example.LibraryProjectWebApp.service.dto.BookDto;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,17 +8,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService extends UserDetailsService {
 
     @Override
     UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
-    List<User> findAll();
-
     User findUserById(Long id);
 
-    List<User> allUsers();
+    List<User> findAll();
 
     List<User> allUsersWithRoleUser();
 
@@ -33,6 +31,7 @@ public interface UserService extends UserDetailsService {
 
     boolean activateUser(String code);
     List<BookDto> getBooksByUserId(Long id);
+    Optional<User> findByEmail(String email);
 
 
 }

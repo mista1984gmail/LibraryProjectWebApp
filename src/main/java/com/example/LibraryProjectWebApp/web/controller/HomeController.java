@@ -22,8 +22,6 @@ public class HomeController {
 
     private final UserService userService;
 
-
-
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage() {
         return "login";

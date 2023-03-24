@@ -23,7 +23,6 @@
         <table class="table table-bordered table-success table-hover">
             <thead class="thead-dark">
             <tr>
-                <th>ID</th>
                 <th >Code book</th>
                 <th >Title</th>
                 <th >Author</th>
@@ -34,7 +33,6 @@
             <tbody id="myTable">
             <th:block th:each="book : ${books}">
                 <tr>
-                    <td >[[${book.id}]]</td>
                     <td>[[${book.codeBook}]]</td>
                     <td>[[${book.title}]]</td>
                     <td>[[${book.author}]]</td>
