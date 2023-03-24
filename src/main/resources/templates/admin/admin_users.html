@@ -17,7 +17,7 @@
 <div th:switch="${users}">
     <h2 th:case="null">No users found!</h2>
     <div th:case="*">
-        <div><h2 class="text-center">Users</h2></div>
+        <div><h2 class="text-center" th:text="#{users}"></h2></div>
 
         <input class="form-control col-4" id="myInput" type="text" placeholder="Search..">
         <br>
@@ -26,11 +26,11 @@
             <thead class="table-light">
             <tr>
                 <th>Id</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <th th:text="#{first_name}"></th>
+                <th th:text="#{last_name}"></th>
                 <th>Email</th>
-                <th>Role</th>
-                <th>Action</th>
+                <th th:text="#{role}"></th>
+                <th th:text="#{action}">Action</th>
             </tr>
             </thead>
             <tbody id="myTable">
@@ -42,7 +42,7 @@
                     <td>[[${user.email}]]</td>
                     <td>[[${user.roles}]]</td>
                     <td>
-                        <a th:href="@{'/admin/edit/'+${user.id}}" >Edit</a>
+                        <a th:href="@{'/admin/edit/'+${user.id}}" th:text="#{edit}"></a>
                     </td>
                 </tr>
             </th:block>

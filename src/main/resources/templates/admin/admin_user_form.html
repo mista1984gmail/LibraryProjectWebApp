@@ -10,34 +10,34 @@
 </head>
 <body class="bg-success p-2 text-dark bg-opacity-25">
 <th:block th:include="/admin/_menu_admin"></th:block>
-<div><h4 class="text-light"></h4>User</div>
+<div><h4 class="text-light" th:text="#{user}"></h4></div>
 
 <form class="row g-3" action="#" th:action="@{'/admin/save/'+${user.id}}" th:object="${user}" method="post">
     <div class="col-md-4">
-        <label for="username" class="form-label bg-info text-light" >Username</label>
+        <label for="username" class="form-label bg-info text-light" th:text="#{username}"></label>
         <input type="text" class="form-control" readonly="readonly" th:field="*{username}" id="username" placeholder="Username">
         <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Name Error</div>
 
     </div>
     <div class="col-md-8" hidden>
-        <label for="password" class="form-label bg-info text-light" >Password</label>
+        <label for="password" class="form-label bg-info text-light" th:text="#{password}"></label>
         <input type="text" class="form-control" th:field="*{password}" id="password" placeholder="password">
         <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Name Error</div>
     </div>
     <div class="col-4">
-        <label for="firstName" class="form-label bg-info text-light">First name</label>
+        <label for="firstName" class="form-label bg-info text-light" th:text="#{first_name}"></label>
         <input type="text" class="form-control" th:field="*{firstName}" id="firstName" placeholder="First Name">
     </div>
     <div class="col-4">
-        <label for="lastName" class="form-label bg-info text-light" >Last name</label>
+        <label for="lastName" class="form-label bg-info text-light" th:text="#{last_name}"></label>
         <input type="text" class="form-control" th:field="*{lastName}" id="lastName" placeholder="Last Name">
     </div>
     <div class="col-4">
-        <label for="birthday" class="form-label bg-info text-light" >Birthday</label>
+        <label for="birthday" class="form-label bg-info text-light" th:text="#{birthday}"></label>
         <input type="date" class="form-control" th:field="*{birthday}" id="birthday" placeholder="Birthday">
     </div>
     <div class="col-md-12">
-        <label for="address" class="form-label bg-info text-light">Address</label>
+        <label for="address" class="form-label bg-info text-light" th:text="#{address}"></label>
         <input type="text" class="form-control" th:field="*{address}" id="address" placeholder="Address">
     </div>
     <div class="col-md-6">
@@ -46,7 +46,7 @@
         <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Name Error</div>
     </div>
     <div class="col-md-6">
-        <label for="telephone" class="form-label bg-info text-light" >Telephone</label>
+        <label for="telephone" class="form-label bg-info text-light" th:text="#{telephone}"></label>
         <input type="text" class="form-control" readonly="readonly" th:field="*{telephone}" id="telephone" placeholder="Telephone">
         <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}">Name Error</div>
     </div>
@@ -57,7 +57,7 @@
 
         <input type = "hidden" name="detailID" th:value="${role.id}" />
         <div class="form-group row">
-            <label class="col-form-label col-sm-1 bg-info text-light">Role</label>
+            <label class="col-form-label col-sm-1 bg-info text-light" th:text="#{role}"></label>
             <div class="col-sm-4">
 
                 <select type="text" name="detailName" th:value="${role.name}" class="form-control" required>
@@ -77,11 +77,11 @@
     </div>
 
     <div class="col-md-12">
-    <label class="col-sm-1 bg-info text-light" for="active" >Active</label>
+    <label class="col-sm-1 bg-info text-light" for="active" th:text="#{active}">Active</label>
     <input class="form-check-input" type="checkbox" th:field="*{active}" id="active" placeholder="active">
     </div>
     <div class="col-12">
-        <button type="submit" class="btn btn-primary" >Save</button>
+        <button type="submit" class="btn btn-primary" th:text="#{save}"></button>
     </div>
 </form>
 

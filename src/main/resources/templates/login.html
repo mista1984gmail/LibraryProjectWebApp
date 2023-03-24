@@ -10,24 +10,24 @@
 <body class="bg-success p-2 text-dark bg-opacity-25">
 
 <div style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;background-color: #1F75FE">
-    <a class="text-white" th:href="@{/}">Home</a>
+    <a class="text-white" th:href="@{/}" th:text="#{up}"></a>
     | &nbsp;
 </div>
 
 
 <div class="container">
     <form class="form-signin" method="post" action="/login">
-        <h2 class="form-signin-heading">Please login</h2>
+        <h2 class="form-signin-heading" th:text="#{please_login}"></h2>
         <p class="col-md-4">
-            <label for="username" class="sr-only" >Username</label>
+            <label for="username" class="sr-only" th:text="#{username}"></label>
             <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
         </p>
         <p class="col-md-4">
-            <label for="password" class="sr-only" >Password</label>
+            <label for="password" class="sr-only" th:text="#{password}"></label>
             <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
         </p>
 
-        <button class="btn btn-lg btn-primary btn-block" type="submit" >Login</button>
+        <button class="btn btn-lg btn-primary btn-block" type="submit" th:text="#{login}"></button>
     </form>
 </div>
 </body>

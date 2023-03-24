@@ -6,10 +6,10 @@
 </head>
 <body>
 <div style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;background-color: #1F75FE">
-    <a class="text-white" th:href="@{/}">Home</a>
+    <a class="text-white" th:href="@{/}" th:text="#{up}"></a>
     | &nbsp;
 </div>
-<h3 style="color: red;" >You do not have permission to access this page!</h3>
+<h3 style="color: red;" th:text="#{messages_403}"></h3>
 
 </body>
 </html>

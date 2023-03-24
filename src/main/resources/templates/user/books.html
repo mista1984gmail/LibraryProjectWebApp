@@ -18,12 +18,12 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <li><a class="dropdown-item"  th:href="@{'/user/user/'+${person.id}}" >Home</a></li>
-                <li><a class="dropdown-item" th:href="@{'/user/books/'+${person.id}}">Find book</a></li>
-                <li><a class="dropdown-item" th:href="@{'/user/info/'+${person.id}}">My books</a></li>
-                <li><a class="dropdown-item" th:href="@{'/user/edit/'+${person.id}}">Account</a></li>
+                <li><a class="dropdown-item"  th:href="@{'/user/user/'+${person.id}}" th:text="#{up}"></a></li>
+                <li><a class="dropdown-item" th:href="@{'/user/books/'+${person.id}}" th:text="#{find_book}"></a></li>
+                <li><a class="dropdown-item" th:href="@{'/user/info/'+${person.id}}" th:text="#{my_books}"></a></li>
+                <li><a class="dropdown-item" th:href="@{'/user/edit/'+${person.id}}" th:text="#{account}"></a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" >Logout</a></li>
+                <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" th:text="#{logout}"></a></li>
             </ul>
         </div>
     </div>
@@ -34,18 +34,18 @@
 <div th:switch="${books}">
     <h2 th:case="null">No Books found!</h2>
     <div th:case="*">
-        <div><h2 class="text-center text-dark bg-info" >Books</h2></div>
+        <div><h2 class="text-center text-dark bg-info" th:text="#{books}"></h2></div>
 
         <input class="form-control" id="myInput" type="text" placeholder="Search..">
         <br>
         <table class="table table-bordered table-success table-hover">
             <thead class="thead-dark">
             <tr>
-                <th >Code book</th>
-                <th >Title</th>
-                <th >Author</th>
-                <th >Year</th>
-                <th >Action</th>
+                <th th:text="#{code_book}"></th>
+                <th th:text="#{title}"></th>
+                <th th:text="#{author}"></th>
+                <th th:text="#{year}"></th>
+                <th th:text="#{action}"></th>
             </tr>
             </thead>
             <tbody id="myTable">
@@ -56,7 +56,7 @@
                     <td>[[${book.author}]]</td>
                     <td>[[${book.year}]]</td>
                     <td>
-                        <a th:object="${person}" th:field="*{id}" id="person" th:href="@{'/user/' + ${person.id} + '/book/add/'+${book.id}}">Booking</a>
+                        <a th:object="${person}" th:field="*{id}" id="person" th:href="@{'/user/' + ${person.id} + '/book/add/'+${book.id}}" th:text="#{booking}"></a>
                     </td>
                 </tr>
             </th:block>

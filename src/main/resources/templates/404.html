@@ -8,15 +8,15 @@
 <div
         style="border: 1px solid #ccc;padding:5px;margin-bottom:20px;">
 
-    <a th:href="@{/}" >Home</a>
+    <a th:href="@{/}" th:text="#{up}">Home</a>
 
     | &nbsp;
 
-    <a th:href="@{/logout}" >Logout</a>
+    <a th:href="@{/logout}" th:text="#{logout}"></a>
 
 </div>
 
-<h3 style="color: red;" >Activation code is not found. Please, confirm email or contact support admin@mail.ru!</h3>
+<h3 style="color: red;" th:text="#{messages_404}"></h3>
 
 
 

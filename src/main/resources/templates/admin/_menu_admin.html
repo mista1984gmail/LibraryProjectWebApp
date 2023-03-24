@@ -1,16 +1,16 @@
 <div xmlns:th="http://www.thymeleaf.org">
 <nav class="navbar navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/admin/admin}" >ADMIN APP</a>
+        <a class="navbar-brand" th:href="@{/admin/admin}" th:text="#{admin_app}">ADMIN APP</a>
         <div class="btn-group dropstart">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li><a class="dropdown-item"  th:href="@{/admin/admin}" >Home</a></li>
-            <li><a class="dropdown-item"  th:href="@{/admin/readers}" >Readers</a></li>
+            <li><a class="dropdown-item"  th:href="@{/admin/admin}" th:text="#{up}"></a></li>
+            <li><a class="dropdown-item"  th:href="@{/admin/readers}" th:text="#{readers}"></a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a></li>
+            <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" th:text="#{logout}"></a></li>
         </ul>
         </div>
     </div>

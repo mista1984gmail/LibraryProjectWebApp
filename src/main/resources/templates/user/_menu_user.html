@@ -1,18 +1,18 @@
 <div xmlns:th="http://www.thymeleaf.org">
     <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
-            <a class="navbar-brand" th:href="@{'/user/user/'+${user.id}}" >USER APP</a>
+            <a class="navbar-brand" th:href="@{'/user/user/'+${user.id}}" th:text="#{reader_app}"></a>
             <div class="btn-group dropstart">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <li><a class="dropdown-item"  th:href="@{'/user/user/'+${user.id}}" >Home</a></li>
-                    <li><a class="dropdown-item" th:href="@{'/user/books/'+${user.id}}">Find book</a></li>
-                    <li><a class="dropdown-item" th:href="@{'/user/info/'+${user.id}}">My books</a></li>
-                    <li><a class="dropdown-item" th:href="@{'/user/edit/'+${user.id}}">Account</a></li>
+                    <li><a class="dropdown-item"  th:href="@{'/user/user/'+${user.id}}" th:text="#{up}"></a></li>
+                    <li><a class="dropdown-item" th:href="@{'/user/books/'+${user.id}}" th:text="#{find_book}"></a></li>
+                    <li><a class="dropdown-item" th:href="@{'/user/info/'+${user.id}}" th:text="#{my_books}"></a></li>
+                    <li><a class="dropdown-item" th:href="@{'/user/edit/'+${user.id}}" th:text="#{account}"></a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" >Logout</a></li>
+                    <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" th:text="#{logout}"></a></li>
                 </ul>
             </div>
         </div>
