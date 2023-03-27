@@ -15,21 +15,21 @@
     <h2 th:case="null">No users found!</h2>
     <br>
     <div th:case="*">
-        <div><h2 class="text-center text-white" >Readers</h2></div>
+        <div><h2 class="text-center text-white" th:text="#{readers}"></h2></div>
 
         <input class="form-control" id="myInput" type="text" placeholder="Search..">
         <br>
         <table class="table table-bordered table-success table-hover">
             <thead class="thead-dark">
             <tr>
-                <th >First name</th>
-                <th >Last name</th>
-                <th >Birthday</th>
-                <th >Age</th>
-                <th >Address</th>
+                <th th:text="#{first_name}"></th>
+                <th th:text="#{last_name}"></th>
+                <th th:text="#{birthday}"></th>
+                <th th:text="#{age}"></th>
+                <th th:text="#{address}"></th>
                 <th >email</th>
-                <th >Telephone</th>
-                <th >Books</th>
+                <th th:text="#{telephone}"></th>
+                <th th:text="#{books}"></th>
             </tr>
             </thead>
             <tbody id="myTable">
@@ -41,7 +41,7 @@
                 <td th:text="${user.address}"></td>
                 <td th:text="${user.email}"></td>
                 <td th:text="${user.telephone}"></td>
-                <td><a th:href="@{/librarian/books/{id}(id=${user.id})}" >Books</a></td>
+                <td><a th:href="@{/librarian/books/{id}(id=${user.id})}" th:text="#{books}"></a></td>
             </tr>
             </tbody>
         </table>

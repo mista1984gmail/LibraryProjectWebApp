@@ -1,19 +1,19 @@
 <div xmlns:th="http://www.thymeleaf.org">
 <nav class="navbar navbar-dark bg-primary">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{/librarian/librarian}" >LIBRARIAN APP</a>
+        <a class="navbar-brand" th:href="@{/librarian/librarian}" th:text="#{librarian_app}">LIBRARIAN APP</a>
         <div class="btn-group dropstart">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                 <span class="navbar-toggler-icon"></span>
             </button>
         <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <li><a class="dropdown-item"  th:href="@{/librarian/librarian}" >Home</a></li>
-            <li><a class="dropdown-item"  th:href="@{/librarian/books}" >Find book</a></li>
-            <li><a class="dropdown-item"  th:href="@{/librarian/book/new}" >Create book</a></li>
-            <li><a class="dropdown-item"  th:href="@{/librarian/readers}" >Readers</a></li>
-            <li><a class="dropdown-item"  th:href="@{/librarian/overdue-books}" >Overdue books</a></li>
+            <li><a class="dropdown-item"  th:href="@{/librarian/librarian}" th:text="#{up}"></a></li>
+            <li><a class="dropdown-item"  th:href="@{/librarian/books}" th:text="#{find_book}"></a></li>
+            <li><a class="dropdown-item"  th:href="@{/librarian/book/new}" th:text="#{create_book}"></a></li>
+            <li><a class="dropdown-item"  th:href="@{/librarian/readers}" th:text="#{readers}"></a></li>
+            <li><a class="dropdown-item"  th:href="@{/librarian/overdue-books}" th:text="#{overdue_books}"></a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}">Logout</a></li>
+            <li><a class="dropdown-item" th:if="${#request.userPrincipal != null}" th:href="@{/logout}" th:text="#{logout}"></a></li>
         </ul>
         </div>
     </div>

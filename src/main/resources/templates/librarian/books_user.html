@@ -14,17 +14,17 @@
 <th:block th:include="/librarian/_menu_librarian"></th:block>
 <br>
 <div class="container text-center">
-    <div><h1 class="text-light bg-info">User info</h1></div>
+    <div><h1 class="text-light bg-info" th:text="#{user_info}"></h1></div>
     <table class="table table-bordered table-success table-hover">
         <thead class="thead-dark">
         <tr>
-            <th >First name</th>
-            <th >Last name</th>
-            <th >Birthday</th>
-            <th >Age</th>
-            <th >Address</th>
+            <th th:text="#{first_name}"></th>
+            <th th:text="#{last_name}"></th>
+            <th th:text="#{birthday}"></th>
+            <th th:text="#{age}"></th>
+            <th th:text="#{address}"></th>
             <th >email</th>
-            <th >Telephone</th>
+            <th th:text="#{telephone}"></th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
         </tr>
         </tbody>
     </table>
-    <div><h1 class="text-light bg-info">Books</h1></div>
+    <div><h1 class="text-light bg-info" th:text="#{books}"></h1></div>
 
 
 
@@ -46,13 +46,13 @@
         <table class="table table-bordered table-success table-hover">
             <thead class="thead-dark">
             <tr>
-                <th >Code of book</th>
-                <th >Title</th>
-                <th >Author</th>
-                <th >Year</th>
-                <th >Taken at</th>
-                <th >Return before</th>
-                <th>Action</th>
+                <th th:text="#{code_book}"></th>
+                <th th:text="#{title}"></th>
+                <th th:text="#{author}"></th>
+                <th th:text="#{year}"></th>
+                <th th:text="#{date_of_taking_book}"></th>
+                <th th:text="#{book_return_date}"></th>
+                <th th:text="#{action}"></th>
             </tr>
             </thead>
 
@@ -66,7 +66,7 @@
                     <td th:style="${book.isExpired()} ? 'color: red' : 'color: black'">[[${book.takenAtString}]]</td>
                     <td th:style="${book.isExpired()} ? 'color: red' : 'color: black'">[[${book.returnBefore}]]</td>
                     <td>
-                        <a th:href="@{'/librarian/book/'+${user.id}+'/release/'+${book.id}}">Release</a>
+                        <a th:href="@{'/librarian/book/'+${user.id}+'/release/'+${book.id}}" th:text="#{release}">Release</a>
                     </td>
                 </tr>
             </th:block>

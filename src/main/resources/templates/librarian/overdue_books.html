@@ -16,31 +16,29 @@
     <h2 th:case="null">No Books found!</h2>
     <div th:case="*">
         <br>
-        <div><h2 class="text-center text-white" >Books</h2></div>
+        <div><h2 class="text-center text-white" th:text="#{books}"></h2></div>
 
         <input class="form-control" id="myInput" type="text" placeholder="Search..">
         <br>
         <table class="table table-bordered table-success table-hover">
             <thead class="thead-dark">
             <tr>
-                <th>ID</th>
-                <th >Code book</th>
-                <th >Title</th>
-                <th >Author</th>
-                <th >Year</th>
-                <th >Action</th>
+                <th th:text="#{code_book}"></th>
+                <th th:text="#{title}"></th>
+                <th th:text="#{author}"></th>
+                <th th:text="#{year}"></th>
+                <th th:text="#{action}"></th>
             </tr>
             </thead>
             <tbody id="myTable">
             <th:block th:each="book : ${books}">
                 <tr>
-                    <td >[[${book.id}]]</td>
                     <td>[[${book.codeBook}]]</td>
                     <td>[[${book.title}]]</td>
                     <td>[[${book.author}]]</td>
                     <td>[[${book.year}]]</td>
                     <td>
-                        <a th:href="@{'/librarian/book/show/'+${book.id}}">Show info</a>
+                        <a th:href="@{'/librarian/book/show/'+${book.id}}" th:text="#{show_info}"></a>
                     </td>
                 </tr>
             </th:block>

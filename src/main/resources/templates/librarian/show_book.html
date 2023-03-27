@@ -9,15 +9,15 @@
 </head>
 <body class="bg-success p-2 text-dark bg-opacity-25">
 <th:block th:include="/librarian/_menu_librarian"></th:block>
-<h3>Book:</h3>
+<h3 th:text="#{book_book}"></h3>
 <p class="font-italic" th:text="${book.getTitle() + ', ' + book.getAuthor() + ', ' + book.getYear()}">VALUE</p>
 
 <div th:if="${owner}">
   <div th:if="${book.isBooked()==false}">
-  <span>The book is now: </span> <span th:text="${owner.getFirstName() + ' ' + owner.getLastName()}">Person Name</span>
-  <a th:href="@{'/librarian/books/'+${owner.getId()}}">Show info about reader</a>
+  <span th:text="#{the_book_is_now}"> </span> <span th:text="${owner.getFirstName() + ' ' + owner.getLastName()}">Person Name</span>
+  <a th:href="@{'/librarian/books/'+${owner.getId()}}" th:text="#{show_info_about_reader}"></a>
   <form th:method="GET" th:action="@{'/librarian/book/'+${owner.id}+'/release/'+${book.id}}">
-    <input type="submit" value="Release book"/>
+    <input type="submit" th:value="#{release}"/>
   </form>
   </div>
 
@@ -25,50 +25,50 @@
 
 <div th:if="${book.isBooked()}">
 
-  <span>The book is booking: </span> <span th:text="${owner.getFirstName() + ' ' + owner.getLastName()}">Person Name</span>
-  <a th:href="@{'/librarian/books/'+${owner.getId()}}">Show info about reader</a>
+  <span th:text="#{the_book_is_booking}"> </span> <span th:text="${owner.getFirstName() + ' ' + owner.getLastName()}">Person Name</span>
+  <a th:href="@{'/librarian/books/'+${owner.getId()}}" th:text="#{show_info_about_reader}"></a>
   <br>
 <div class="btn-group">
     <form th:method="GET" th:action="@{'/librarian/book/'+${owner.id}+'/assignBook/'+${book.id}}">
-         <input type="submit" value="Confirm booking"/>
+         <input type="submit" th:value="#{confirm_booking}"/>
       </form>
 
   <form th:method="GET" th:action="@{'/librarian/book/'+${owner.id}+'/release/'+${book.id}}">
-    <input type="submit" value="Cancel  booking"/>
+    <input type="submit" th:value="#{cancel_booking}"/>
   </form>
 </div>
 
       </div>
 
       <div th:if="${people}">
-        <span>This book is free. To whom should she be assigned?</span>
+        <span th:text="#{the_book_is_free}"></span>
         <form th:method="GET" th:action="@{librarian/books/{id}/assign(id=${book.getId()})}">
-          <label for="person">Choose a person</label>
+          <label for="person" th:text="#{choose_a_person}">Choose a person</label>
           <select th:object="${person}" th:field="*{id}" id="person">
             <option th:each="person : ${people}" th:value="${person.getId()}" th:text="${person.getFirstName()+ ' ' + person.getLastName()}">
             </option>
           </select>
-          <input type="submit" value="Assign book"/>
+          <input type="submit" th:value="#{assign_book}"/>
         </form>
       </div>
 
       <hr/>
 
       <form th:method="GET" th:action="@{librarian/book/{id}/edit(id=${book.getId()})}">
-        <input type="submit" value="Edit"/>
+        <input type="submit"  th:value="#{edit}"/>
       </form>
       <br>
       <form th:method="POST" th:action="@{librarian/book/delete/{id}(id=${book.getId()})}">
-        <input type="submit" value="Delete"/>
+        <input type="submit" th:value="#{delete}"/>
       </form>
 
       <hr/>
 <div th:if="${book.isExpired()!=null}">
 <div th:if="${book.isExpired()}">
 
-    <span>The book is expired: </span>
+    <span th:text="#{the_book_is_expired}">The book is expired: </span>
   <form th:method="GET" th:action="@{librarian/book/{id}/send-message(id=${book.getId()})}">
-    <input type="submit" value="Send message on email"/>
+    <input type="submit" th:value="#{send_message_on_email}"/>
   </form>
 
 </div>

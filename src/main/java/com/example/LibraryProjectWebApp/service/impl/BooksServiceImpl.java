@@ -100,7 +100,7 @@ public class BooksServiceImpl implements BookService {
         Book bookToBeUpdated = booksRepository.findById(id).get();
 
         updatedBook.setId(id);
-        updatedBook.setTakenAt(null);
+        updatedBook.setTakenAt(bookToBeUpdated.getTakenAt());
         updatedBook.setOwner(bookToBeUpdated.getOwner());
 
         log.info("Update book with code: " + updatedBook.getCodeBook());

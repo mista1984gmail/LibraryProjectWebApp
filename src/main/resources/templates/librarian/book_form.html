@@ -12,25 +12,25 @@
 <th:block th:include="/librarian/_menu_librarian"></th:block>
 <br>
 <div class="col-md-12">
-    <h3 class="text-center bg-info text-light">Create new book</h3>
+    <h3 class="text-center bg-info text-light" th:text="#{create_new_book}">Create new book</h3>
 </div>
 <br>
 <div class="container ">
 
     <form th:method="POST" th:action="@{/librarian/book}" th:object="${book}">
-        <label for="title" class="form-label bg-info text-light">Enter book title: </label>
+        <label for="title" class="form-label bg-info text-light" th:text="#{enter_book_title}"></label>
         <input type="text" th:field="*{title}" id="title" placeholder="Book title"/>
         <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Title Error</div>
         <br>
-        <label for="author" class="form-label bg-info text-light">Enter author: </label>
+        <label for="author" class="form-label bg-info text-light" th:text="#{enter_author}"></label>
         <input type="text" th:field="*{author}" id="author" placeholder="Author"/>
         <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">Author Error</div>
         <br>
-        <label for="year" class="form-label bg-info text-light" >Enter year: </label>
+        <label for="year" class="form-label bg-info text-light" th:text="#{enter_year}"></label>
         <input type="text" th:field="*{year}" id="year" placeholder="Year"/>
         <div style="color:red" class="alert alert-warning" th:if="${#fields.hasErrors('year')}" th:errors="*{year}">Year Error</div>
         <br>
-        <input type="submit" value="Create!"/>
+        <input type="submit" th:value="#{create}"/>
     </form>
 </div>
 </body>
