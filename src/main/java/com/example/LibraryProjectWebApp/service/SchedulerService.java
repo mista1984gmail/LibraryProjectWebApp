@@ -19,7 +19,9 @@ public class SchedulerService {
 
     @Scheduled(initialDelayString = Constant.INIT_DELAY_SCHEDULE, fixedDelayString = Constant.BOOKING_CHECK_SCHEDULE)
     public void checkBookingTimeHasBeenExceeded() throws InterruptedException {
+        log.info("Find all books");
         List<BookDto> books = bookService.findAll();
+        log.info("On schedule: check booking time has been exceeded");
         books.stream()
                 .filter(BookDto::isBooked)
                 .filter(book -> Math.abs(book.getTakenAt().getTime() - new Date().getTime()) > Constant.BOOK_TAKE_DEADLINE_MS).toList()
