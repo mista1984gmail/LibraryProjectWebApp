@@ -63,4 +63,33 @@ There are three roles in the application: ADMIN, USER and LIBRARIAN.
  - Reader can booking the book he needs, if it is free and it will be available in the library within two days. He can go to the library and take it.
  - The reader can see the books that are in "his hands", as well as by the booking status, books that are simply reserved.
    ![img.png](img/img20.png)
-    
+
+**Librarian functionality.**  
+- After logging in to the application, the following page is visible under the LIBRARIAN role.
+    ![img.png](img/img21.png)
+- The librarian can create a new book.
+    ![img.png](img/img22.png)
+- The librarian can search for books by book code, title, author, year of publication of the book. After the librarian finds the right book, he can see information about it.
+    ![img.png](img/img23.png)
+    ![img.png](img/img24.png)
+- The librarian can look up information and the book. If the book is free, then assign it to a reader.
+    ![img.png](img/img25.png)
+- After the librarian assigns the book to the reader. We will see an updated page with the data of who owns this book, we can look at the information about reader or return the book back to the library. At each stage, the librarian can edit the book and delete it.
+    ![img.png](img/img26.png)
+- On the user page, you can see all the user's books, as well as return the book to the library.
+    ![img.png](img/img27.png)
+- The librarian can view all readers, search by first name, last name, address, or email address, and view the books that are owned by the reader.
+    ![img.png](img/img28.png)
+    ![img.png](img/img29.png)
+- If a reader has reserved a book, the reader must come to the library and borrow it. The librarian finds this book and can assign this book to the reader or cancel the booking.
+    ![img.png](img/img30.png)
+- If the reader did not return the book to the library on time (10 days of taking the book), the book becomes overdue and the librarian can see it in the overdue books tab.
+    ![img.png](img/img31.png)
+- The librarian entering the user's page can immediately see overdue books, they are highlighted in red.
+    ![img.png](img/img32.png)
+- Having found an overdue book and going to it, the librarian will see that it is overdue and can send an email to the reader with a reminder to return the book by pressing one button.
+    ![img.png](img/img33.png)
+    ![img.png](img/img34.png)
+
+
+**Thanks to everyone who got here. Have a good day :)**
