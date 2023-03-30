@@ -33,4 +33,34 @@ The project uses the following technologies:
     ![img.png](img/img11.png)
 16. **Testing** - unit tests to test the service layer and integration tests to test the controller layer using Mockito framework.
 
+**Project description:** 
+
+The database schema is shown in the following image:
+    ![img.png](img/img12.png)
+
+There are three roles in the application: ADMIN, USER and LIBRARIAN.
+
+**Administrator functionality.**
+
+ - After logging in to the application, the following page is visible under the ADMIN role.
+    ![img.png](img/img13.png)
+ - Admin can see all users and search by first name, last name or email.
+    ![img.png](img/img14.png)
+ - The administrator can edit user data, except for the username, email, password and telephone fields. Assign and change roles to users, as well as block the user, after which he will not be able to enter the application.
+    ![img.png](img/img15.png)
+
+**Reader functionality.**
+
+ - After logging in to the application, the following page is visible under the USER role.
+    ![img.png](img/img16.png)
+
+ - Reader can edit information about himself in his account.
+    ![img.png](img/img17.png)
+ - Reader can see all free books.
+   ![img.png](img/img18.png)
+ - Search for a book by title, author, year of publication of the book.
+   ![img.png](img/img19.png)
+ - Reader can booking the book he needs, if it is free and it will be available in the library within two days. He can go to the library and take it.
+ - The reader can see the books that are in "his hands", as well as by the booking status, books that are simply reserved.
+   ![img.png](img/img20.png)
     
