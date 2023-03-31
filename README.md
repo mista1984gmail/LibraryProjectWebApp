@@ -72,11 +72,11 @@ There are three roles in the application: ADMIN, USER and LIBRARIAN.
 - The librarian can search for books by book code, title, author, year of publication of the book. After the librarian finds the right book, he can see information about it.
     ![img.png](img/img23.png)
     ![img.png](img/img24.png)
-- The librarian can look up information and the book. If the book is free, then assign it to a reader.
+- The librarian can look up information about book. If the book is free, then assign it to a reader.
     ![img.png](img/img25.png)
-- After the librarian assigns the book to the reader. We will see an updated page with the data of who owns this book, we can look at the information about reader or return the book back to the library. At each stage, the librarian can edit the book and delete it.
+- After the librarian assigns the book to the reader, we will see an updated page with the data of who owns this book, we can look at the information about reader or return the book back to the library. At each stage, the librarian can edit the book and delete it.
     ![img.png](img/img26.png)
-- On the user page, you can see all the user's books, as well as return the book to the library.
+- On the user page, librarian can see all the user's books, as well as return the book to the library.
     ![img.png](img/img27.png)
 - The librarian can view all readers, search by first name, last name, address, or email address, and view the books that are owned by the reader.
     ![img.png](img/img28.png)
